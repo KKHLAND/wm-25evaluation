@@ -1,0 +1,8 @@
+{
+  "name": "2025 학교평가 분석 대시보드 - 원묵고등학교",
+  "description": "원묵고등학교 2025학년도 학교평가 분석 및 대시보드 프리젠테이션 웹 애플리케이션",
+  "permissions": [],
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

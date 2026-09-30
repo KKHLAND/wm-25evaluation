@@ -4,6 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>2025 학교평가 분석 대시보드 - 원묵고등학교</title>
+    <meta name="description" content="원묵고등학교 2025학년도 학교평가 분석 및 대시보드 프리젠테이션 웹 애플리케이션" />
+    <meta property="og:title" content="2025 학교평가 분석 대시보드 - 원묵고등학교" />
+    <meta property="og:description" content="원묵고등학교 2025학년도 학교평가 분석 및 대시보드 프리젠테이션 웹 애플리케이션" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap">
     
@@ -413,23 +416,22 @@
 
       /* Presentation Content Wrapper */
       .presentation-content-wrapper {
-        min-height: 100vh;
+        min-height: 100%;
         width: 100%;
         display: flex;
+        flex: 1 1 auto;
         flex-direction: column;
         align-items: center;
-        /* Mobile default: Start from top */
-        justify-content: flex-start; 
-        padding-top: 4rem;
-        padding-bottom: 4rem;
+        justify-content: center;
+        padding: 1rem;
+        box-sizing: border-box;
       }
 
       /* Tablet and Desktop: Center if content fits */
       @media (min-width: 768px) {
         .presentation-content-wrapper {
           justify-content: center;
-          padding-top: 0;
-          padding-bottom: 0;
+          padding: 1.25rem 2rem;
         }
       }
     </style>
@@ -1189,33 +1191,34 @@
             };
             
             return (
-                <header className="glass sticky top-0 z-50 px-4 md:px-8 py-3 md:py-4">
+                <header className="bg-white/95 backdrop-blur-xl shadow-md border-b border-gray-200/80 sticky top-0 z-50 px-4 md:px-8 py-2 md:py-2.5">
                     <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
                         <div className="flex items-center gap-4 w-full md:w-auto">
-                            <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl flex items-center justify-center text-white shadow-lg shrink-0">
-                                <SchoolIcon />
+                            <div className="w-[53px] h-[53px] md:w-16 md:h-16 ml-1.5 md:ml-2.5 bg-white rounded-full flex items-center justify-center shadow-md border border-gray-100 shrink-0 overflow-hidden p-1">
+                                <img src="https://i.imgur.com/rhc4iBC.png" alt="학교 로고" className="w-full h-full object-contain" />
                             </div>
-                            <div className="overflow-hidden">
-                                <h1 className="text-lg md:text-2xl font-bold text-white truncate">{schoolData.schoolName}</h1>
-                                <p className="text-xs md:text-sm text-white/70 truncate">{schoolData.academicYear}학년도 {schoolData.semester} 분석</p>
+                            <div className="overflow-hidden -ml-1 md:-ml-2">
+                                <h1 className="text-lg md:text-2xl font-bold text-gray-900 truncate">{schoolData.schoolName}</h1>
+                                <p className="text-xs md:text-sm text-gray-500 truncate">{schoolData.academicYear}학년도 {schoolData.semester} 분석</p>
                             </div>
                         </div>
                         <div className="flex items-center gap-2 md:gap-3 w-full md:w-auto justify-end">
                             <button 
                                 onClick={onOpenDataEditor}
-                                className="btn-premium px-4 py-2 md:px-6 md:py-3 bg-white/20 hover:bg-white/30 text-white rounded-xl font-semibold backdrop-blur-xl transition-all text-sm md:text-base whitespace-nowrap"
+                                className="btn-premium px-2.5 py-1 md:px-4 md:py-2 bg-emerald-600 hover:bg-emerald-700 text-white border border-emerald-600 rounded-xl font-semibold shadow-sm transition-all text-sm md:text-base whitespace-nowrap"
                             >
                                 ✏️ 설정
                             </button>
                             <button 
                                 onClick={handleFullScreen}
-                                className="btn-premium p-2 md:p-3 bg-white/20 hover:bg-white/30 text-white rounded-xl backdrop-blur-xl transition-all hidden md:block"
+                                className="btn-premium p-1.5 md:p-2 bg-gray-100 hover:bg-gray-200 text-gray-900 border border-gray-300 rounded-xl text-xl md:text-2xl font-black shadow-sm transition-all hidden md:inline-flex items-center justify-center leading-none"
+                                title="전체화면"
                             >
                                 ⛶
                             </button>
                             <button 
                                 onClick={() => onEnterPresentation()}
-                                className="btn-premium px-4 py-2 md:px-6 md:py-3 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white rounded-xl font-bold shadow-lg transition-all text-sm md:text-base whitespace-nowrap"
+                                className="btn-premium px-2.5 py-1 md:px-4 md:py-2 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white rounded-xl font-bold shadow-lg transition-all text-sm md:text-base whitespace-nowrap"
                             >
                                 🎬 발표
                             </button>
@@ -1439,8 +1442,22 @@
         // ============================================
 
         const SlideWrapper = ({ children, className = '' }) => (
-            <div className={`presentation-content-wrapper p-4 md:p-12 ${className}`}>
+            <div className={`presentation-content-wrapper flex-1 w-full min-h-full flex flex-col justify-center items-center px-4 sm:px-6 md:px-8 py-3 md:py-4 ${className}`}>
                 {children}
+            </div>
+        );
+
+        // Unified Slide Title Component for Consistency & Large Sizing
+        const SlideTitle = ({ children, subtitle }) => (
+            <div className="mb-3 md:mb-5 text-center w-full shrink-0">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tight mb-1.5 md:mb-2 drop-shadow-md">
+                    {children}
+                </h2>
+                {subtitle && (
+                    <p className="text-sm sm:text-base md:text-lg text-white/80 font-medium max-w-4xl mx-auto">
+                        {subtitle}
+                    </p>
+                )}
             </div>
         );
 
@@ -1449,22 +1466,22 @@
             const totalParticipants = schoolData.kpiData.find(k => k.title === '총 참여 인원')?.value || 0;
             return (
                 <SlideWrapper className="text-center">
-                    <div className="zoom-in w-full max-w-4xl mx-auto flex flex-col items-center">
+                    <div className="zoom-in w-full max-w-[94rem] mx-auto flex flex-col items-center">
                         <div className="inline-block p-6 md:p-10 bg-white/10 backdrop-blur-xl rounded-3xl border border-white/20 mb-8 md:mb-12 float glow">
                             <div className="w-24 h-24 md:w-40 md:h-40 text-white">
                                 <SchoolIcon />
                             </div>
                         </div>
-                        <h1 className="display-1 text-white mb-4 md:mb-8">
+                        <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-white tracking-tight mb-4 md:mb-8 drop-shadow-lg">
                             {schoolData.academicYear} 학교 평가
                         </h1>
-                        <p className="text-3xl md:text-6xl text-white/90 font-bold mb-4 md:mb-6 fade-in-up stagger-2">
+                        <p className="text-3xl sm:text-4xl md:text-6xl text-white/90 font-bold mb-4 md:mb-6 fade-in-up stagger-2">
                             <span className="text-yellow-300">{totalParticipants.toLocaleString()}</span>명의 이야기
                         </p>
-                        <p className="text-2xl md:text-4xl text-white/70 font-medium mb-8 fade-in-up stagger-3">
+                        <p className="text-2xl sm:text-3xl md:text-4xl text-white/70 font-medium mb-8 fade-in-up stagger-3">
                             {schoolData.semester} 분석 리포트
                         </p>
-                        <div className="flex items-center justify-center gap-4 md:gap-6 text-white/70 text-xl md:text-3xl fade-in-up stagger-4">
+                        <div className="flex items-center justify-center gap-4 md:gap-6 text-white/70 text-xl sm:text-2xl md:text-3xl fade-in-up stagger-4">
                             <span className="sparkle">✨</span>
                             <span>데이터 기반 인사이트</span>
                             <span className="sparkle">✨</span>
@@ -1482,27 +1499,27 @@
             
             return (
                 <SlideWrapper className="text-center">
-                    <div className="fade-in-scale w-full max-w-4xl mx-auto flex flex-col items-center">
-                        <p className="text-2xl md:text-4xl text-white/70 font-semibold mb-6 md:mb-10">⭐ 종합 만족도 ⭐</p>
-                        <div className="mb-8 md:mb-16">
+                    <div className="fade-in-scale w-full max-w-[94rem] mx-auto flex flex-col items-center">
+                        <SlideTitle subtitle="전체 만족도 점수 현황 및 목표치 달성률">⭐ 종합 만족도</SlideTitle>
+                        <div className="mb-8 md:mb-14">
                             <span className="display-1 text-white number-counter font-black glow" style={{textShadow: '0 0 60px rgba(255,255,255,0.5)'}}>
                                 {score.toFixed(2)}
                             </span>
-                            <span className="text-4xl md:text-7xl text-white/50 font-bold">
+                            <span className="text-4xl sm:text-6xl md:text-7xl text-white/50 font-bold">
                                 /{overallKpi.total.toFixed(1)}
                             </span>
                         </div>
-                        <div className="w-full max-w-4xl mx-auto mb-8 md:mb-12 px-4">
+                        <div className="w-full max-w-5xl mx-auto mb-8 md:mb-12 px-4">
                             <div className="h-6 md:h-10 bg-white/20 rounded-full overflow-hidden backdrop-blur-xl shadow-2xl">
                                 <div 
                                     className="h-full bg-gradient-to-r from-green-400 via-emerald-400 to-teal-500 rounded-full progress-animate"
                                     style={{ width: `${percentage}%` }}
                                 ></div>
                             </div>
-                            <p className="text-2xl md:text-4xl text-white/80 mt-4 md:mt-6 font-bold">{percentage.toFixed(1)}% 달성</p>
+                            <p className="text-2xl sm:text-3xl md:text-4xl text-white/85 mt-4 md:mt-6 font-bold">{percentage.toFixed(1)}% 달성</p>
                         </div>
-                        <div className={`inline-block px-6 py-4 md:px-12 md:py-6 backdrop-blur-xl rounded-3xl border-2 slide-up-bounce ${overallKpi.change >= 0 ? 'bg-green-500/20 border-green-400/50' : 'bg-orange-500/20 border-orange-400/50'}`}>
-                            <p className={`text-xl md:text-4xl font-bold ${overallKpi.change >= 0 ? 'text-green-300' : 'text-orange-300'}`}>
+                        <div className={`inline-block px-8 py-4 md:px-14 md:py-6 backdrop-blur-xl rounded-3xl border-2 slide-up-bounce ${overallKpi.change >= 0 ? 'bg-green-500/20 border-green-400/50' : 'bg-orange-500/20 border-orange-400/50'}`}>
+                            <p className={`text-xl sm:text-3xl md:text-4xl font-bold ${overallKpi.change >= 0 ? 'text-green-300' : 'text-orange-300'}`}>
                                 {overallKpi.change >= 0 ? '📈 ▲' : '📉 ▼'} 전년 대비 {overallKpi.change >= 0 ? '+' : ''}{overallKpi.change.toFixed(2)}점
                             </p>
                         </div>
@@ -1517,11 +1534,11 @@
             
             return (
                 <SlideWrapper className="text-center">
-                    <div className="w-full max-w-6xl fade-in-scale flex flex-col items-center">
-                        <h2 className="text-3xl md:text-6xl font-bold text-white mb-8 md:mb-16">👥 응답자 구성</h2>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center w-full">
+                    <div className="w-full max-w-[94rem] mx-auto fade-in-scale flex flex-col items-center">
+                        <SlideTitle subtitle="그룹별 참여 인원 및 전체 응답자 구성 현황">👥 응답자 구성</SlideTitle>
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 items-center w-full mt-2">
                             <div className="flex items-center justify-center zoom-in w-full">
-                                <div className="w-64 h-64 md:w-96 md:h-96">
+                                <div className="w-72 h-72 md:w-[420px] md:h-[420px]">
                                     <PremiumPieChart data={schoolData.respondentData} />
                                 </div>
                             </div>
@@ -1529,25 +1546,25 @@
                                 {schoolData.respondentData.map((d, index) => (
                                     <div 
                                         key={index} 
-                                        className={`flex items-center justify-between p-4 md:p-6 bg-white/10 backdrop-blur-xl rounded-2xl border border-white/20 slide-up-bounce card-3d`}
+                                        className={`flex items-center justify-between p-5 md:p-7 bg-white/10 backdrop-blur-xl rounded-2xl border border-white/20 slide-up-bounce card-3d`}
                                         style={{ animationDelay: `${index * 150}ms` }}
                                     >
-                                        <div className="flex items-center gap-3 md:gap-4">
+                                        <div className="flex items-center gap-4">
                                             <div 
-                                                className="w-4 h-4 md:w-8 md:h-8 rounded-full shadow-lg"
+                                                className="w-5 h-5 md:w-8 md:h-8 rounded-full shadow-lg"
                                                 style={{ backgroundColor: d.color }}
                                             ></div>
-                                            <span className="text-xl md:text-3xl font-bold text-white">{d.name}</span>
+                                            <span className="text-2xl md:text-4xl font-bold text-white">{d.name}</span>
                                         </div>
-                                        <span className="text-2xl md:text-5xl font-black text-white number-counter">
+                                        <span className="text-3xl md:text-5xl font-black text-white number-counter">
                                             {d.value.toLocaleString()}
-                                            <span className="text-sm md:text-2xl text-white/70 ml-2">명</span>
+                                            <span className="text-lg md:text-2xl text-white/70 ml-2">명</span>
                                         </span>
                                     </div>
                                 ))}
-                                <div className="mt-4 md:mt-8 p-4 md:p-6 bg-gradient-to-r from-indigo-500/30 to-purple-500/30 rounded-2xl border border-indigo-400/30 fade-in-up stagger-5">
-                                    <p className="text-xl md:text-3xl text-white font-bold text-center">
-                                        총 <span className="text-3xl md:text-5xl text-yellow-300">{total.toLocaleString()}</span>명 참여 🎉
+                                <div className="mt-4 md:mt-8 p-5 md:p-7 bg-gradient-to-r from-indigo-500/30 to-purple-500/30 rounded-2xl border border-indigo-400/30 fade-in-up stagger-5">
+                                    <p className="text-2xl md:text-4xl text-white font-bold text-center">
+                                        총 <span className="text-4xl md:text-6xl text-yellow-300 font-black">{total.toLocaleString()}</span>명 참여 🎉
                                     </p>
                                 </div>
                             </div>
@@ -1570,44 +1587,57 @@
 
             return (
                 <SlideWrapper className="text-center">
-                    <div className="w-full max-w-6xl fade-in-up">
-                        <h2 className="text-3xl md:text-6xl font-bold text-white mb-8 md:mb-16">📊 그룹별 실제 응답률</h2>
+                    <div className="w-full max-w-[94rem] mx-auto fade-in-up flex flex-col justify-center">
+                        <SlideTitle subtitle="각 주체별 대상자 대비 실제 설문 응답 완료 비율">📊 그룹별 실제 응답률</SlideTitle>
                         
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 md:gap-5 mt-3 md:mt-4">
                             {groups.map((group, index) => {
                                 const rate = responseRates[group.id] || 0;
                                 const animatedRate = useCountUp(rate, 0, 1500, 1);
+                                const respondentCount = respondentData?.find(r => r.name.includes(group.name))?.value;
                                 
                                 return (
                                     <div 
                                         key={group.id}
-                                        className="bg-white/10 backdrop-blur-xl rounded-3xl p-6 md:p-8 border border-white/20 slide-up-bounce card-3d"
+                                        className="bg-white/10 backdrop-blur-xl rounded-2xl md:rounded-3xl p-5 md:p-7 border border-white/20 slide-up-bounce card-3d flex flex-col justify-between min-h-[280px] md:min-h-[340px]"
                                         style={{ animationDelay: `${index * 150}ms` }}
                                     >
-                                        <div className="flex items-center justify-between mb-4 md:mb-6">
-                                            <div className="flex items-center gap-3 md:gap-4">
-                                                <span className="text-2xl md:text-4xl">{group.icon}</span>
-                                                <h3 className="text-2xl md:text-3xl font-bold text-white">{group.name}</h3>
-                                            </div>
-                                            <span className="text-3xl md:text-5xl font-black text-white number-counter">
+                                        <div className="flex flex-col items-center">
+                                            <span className="text-5xl md:text-6xl mb-2 drop-shadow-md">{group.icon}</span>
+                                            <h3 className="text-2xl md:text-3xl font-extrabold text-white mb-1.5">{group.name}</h3>
+                                            {respondentCount !== undefined && (
+                                                <span className="px-3.5 py-1 rounded-full bg-white/15 text-white/90 text-sm md:text-base font-semibold">
+                                                    참여 {respondentCount.toLocaleString()}명
+                                                </span>
+                                            )}
+                                        </div>
+
+                                        <div className="my-3 md:my-5 text-center">
+                                            <span className="text-5xl md:text-6xl font-black text-white number-counter glow tracking-tight">
                                                 {animatedRate.toFixed(1)}%
                                             </span>
+                                            <p className="text-sm md:text-base text-white/75 font-semibold mt-1">
+                                                응답 참여 완료
+                                            </p>
                                         </div>
                                         
-                                        <div className="h-4 md:h-6 bg-white/20 rounded-full overflow-hidden mb-2">
-                                            <div 
-                                                className="h-full rounded-full progress-animate relative"
-                                                style={{ 
-                                                    width: `${Math.min(rate, 100)}%`,
-                                                    backgroundColor: group.color 
-                                                }}
-                                            >
-                                                <div className="absolute inset-0 bg-white/30 animate-pulse"></div>
+                                        <div className="w-full">
+                                            <div className="h-5 md:h-6 bg-white/20 rounded-full overflow-hidden mb-2 p-0.5">
+                                                <div 
+                                                    className="h-full rounded-full progress-animate relative"
+                                                    style={{ 
+                                                        width: `${Math.min(rate, 100)}%`,
+                                                        backgroundColor: group.color 
+                                                    }}
+                                                >
+                                                    <div className="absolute inset-0 bg-white/30 animate-pulse"></div>
+                                                </div>
+                                            </div>
+                                            <div className="flex justify-between items-center text-xs md:text-sm text-white/70 font-bold px-1">
+                                                <span>0%</span>
+                                                <span className="text-yellow-300 font-extrabold">목표 100%</span>
                                             </div>
                                         </div>
-                                        <p className="text-right text-white/60 text-sm md:text-lg">
-                                            응답 완료
-                                        </p>
                                     </div>
                                 );
                             })}
@@ -1624,36 +1654,56 @@
             
             return (
                 <SlideWrapper className="text-center">
-                    <div className="w-full max-w-6xl fade-in-scale">
-                        <h2 className="text-3xl md:text-5xl font-bold text-white mb-8 md:mb-12">📊 카테고리별 만족도 변화</h2>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
+                    <div className="w-full max-w-[94rem] mx-auto fade-in-scale flex flex-col justify-center">
+                        <SlideTitle subtitle={`${prevYear}학년도 대비 ${academicYear}학년도 주요 영역별 점수 추이`}>📊 카테고리별 만족도 변화</SlideTitle>
+                        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 md:gap-4 mt-3 md:mt-4">
                             {categoryData.map((cat, idx) => {
                                 const currentScore = cat[academicYear] || cat['2025'] || 0;
                                 const prevScore = cat[prevYear] || cat['2024'] || 0;
                                 const change = (currentScore - prevScore).toFixed(2);
                                 const isPositive = parseFloat(change) >= 0;
+                                const percentScore = ((currentScore / 5) * 100).toFixed(0);
                                 return (
                                     <div 
                                         key={idx} 
-                                        className={`bg-white/10 backdrop-blur-xl rounded-2xl p-4 md:p-5 border border-white/20 slide-up-bounce card-3d`}
+                                        className={`bg-white/10 backdrop-blur-xl rounded-2xl p-4 md:p-5 border border-white/20 slide-up-bounce card-3d flex flex-col justify-between min-h-[140px] md:min-h-[165px]`}
                                         style={{ animationDelay: `${idx * 100}ms` }}
                                     >
-                                        <div className="flex justify-between items-center mb-2 md:mb-0">
-                                            <p className="text-base md:text-xl text-white font-semibold text-left">{cat.name}</p>
-                                            <div className="flex items-center gap-2 md:gap-4 shrink-0">
-                                                <span className="text-white/60 text-sm md:text-lg">{prevScore.toFixed(2)}</span>
-                                                <span className="text-white/40 text-lg md:text-2xl">→</span>
-                                                <span className="text-xl md:text-3xl font-bold text-white">{currentScore.toFixed(2)}</span>
-                                                <span className={`text-xs md:text-lg px-2 py-1 md:px-3 rounded-full ${isPositive ? 'bg-green-500/30 text-green-300' : 'bg-red-500/30 text-red-300'}`}>
-                                                    {isPositive ? '+' : ''}{change}
+                                        <div className="flex justify-between items-start mb-2">
+                                            <div className="text-left flex-1 mr-3">
+                                                <span className="text-xs font-bold px-2.5 py-0.5 bg-white/20 rounded-lg text-white/90 uppercase tracking-wider mb-1 inline-block">
+                                                    영역 0{idx + 1}
                                                 </span>
+                                                <p className="text-lg md:text-2xl text-white font-extrabold leading-snug">{cat.name}</p>
+                                            </div>
+                                            <span className={`text-sm md:text-base px-2.5 py-1 rounded-xl font-black shrink-0 ${isPositive ? 'bg-green-500/30 text-green-300 border border-green-400/40' : 'bg-red-500/30 text-red-300 border border-red-400/40'}`}>
+                                                {isPositive ? '▲ +' : '▼ '}{change}점
+                                            </span>
+                                        </div>
+
+                                        <div className="flex items-center justify-between my-2 bg-white/5 p-2.5 md:p-3 rounded-xl border border-white/10">
+                                            <div className="text-left">
+                                                <p className="text-xs text-white/60 font-semibold">{prevYear}년도</p>
+                                                <p className="text-lg md:text-xl text-white/70 font-bold">{prevScore.toFixed(2)}</p>
+                                            </div>
+                                            <span className="text-xl md:text-2xl text-white/40 font-bold">→</span>
+                                            <div className="text-right">
+                                                <p className="text-xs text-indigo-300 font-bold">{academicYear}년도</p>
+                                                <p className="text-2xl md:text-3xl font-black text-white glow">{currentScore.toFixed(2)}<span className="text-xs md:text-sm text-white/60 font-normal"> / 5.0</span></p>
                                             </div>
                                         </div>
-                                        <div className="mt-2 md:mt-4 h-2 md:h-3 bg-white/20 rounded-full overflow-hidden">
-                                            <div 
-                                                className="h-full bg-gradient-to-r from-indigo-400 to-purple-500 rounded-full progress-animate"
-                                                style={{ width: `${(currentScore / 5) * 100}%` }}
-                                            ></div>
+
+                                        <div className="w-full mt-1">
+                                            <div className="h-2.5 md:h-3 bg-white/20 rounded-full overflow-hidden p-0.5">
+                                                <div 
+                                                    className="h-full bg-gradient-to-r from-indigo-400 to-purple-500 rounded-full progress-animate"
+                                                    style={{ width: `${(currentScore / 5) * 100}%` }}
+                                                ></div>
+                                            </div>
+                                            <div className="flex justify-between items-center text-xs text-white/70 font-medium mt-1">
+                                                <span>만족도 환산율</span>
+                                                <span className="text-white font-bold">{percentScore}%</span>
+                                            </div>
                                         </div>
                                     </div>
                                 );
@@ -1669,39 +1719,49 @@
             const { comparisonData } = schoolData;
             
             const groups = [
-                { key: 'teacher', name: '교원', color: '#6366F1', data: comparisonData.teacher },
-                { key: 'student', name: '학생', color: '#EC4899', data: comparisonData.student },
-                { key: 'parent', name: '학부모', color: '#10B981', data: comparisonData.parent },
-                { key: 'staff', name: '직원', color: '#F59E0B', data: comparisonData.staff },
+                { key: 'teacher', name: '교원', color: '#6366F1', icon: '👨‍🏫', data: comparisonData.teacher },
+                { key: 'student', name: '학생', color: '#EC4899', icon: '🎓', data: comparisonData.student },
+                { key: 'parent', name: '학부모', color: '#10B981', icon: '👪', data: comparisonData.parent },
+                { key: 'staff', name: '직원', color: '#F59E0B', icon: '💼', data: comparisonData.staff },
             ];
             
             return (
                 <SlideWrapper className="text-center">
-                    <div className="w-full max-w-6xl fade-in-scale">
-                        <h2 className="text-3xl md:text-5xl font-bold text-white mb-8 md:mb-12">🏅 그룹별 만족도 비교</h2>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+                    <div className="w-full max-w-[94rem] mx-auto fade-in-scale flex flex-col justify-center">
+                        <SlideTitle subtitle="주체별 평균 만족도 및 최고·최저 평가 점수">🏅 그룹별 만족도 비교</SlideTitle>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 md:gap-5 mt-3 md:mt-4">
                             {groups.map((group, idx) => (
                                 <div 
                                     key={idx}
-                                    className={`bg-white/10 backdrop-blur-xl rounded-3xl p-6 border border-white/20 flip-in`}
+                                    className={`bg-white/10 backdrop-blur-xl rounded-2xl md:rounded-3xl p-5 md:p-7 border border-white/20 flip-in flex flex-col justify-between min-h-[300px] md:min-h-[360px]`}
                                     style={{ animationDelay: `${idx * 150}ms` }}
                                 >
-                                    <div className="flex items-center gap-3 mb-4 md:mb-6 justify-center md:justify-start">
-                                        <div className="w-5 h-5 rounded-full" style={{ backgroundColor: group.color }}></div>
-                                        <h3 className="text-xl md:text-2xl font-bold text-white">{group.name}</h3>
+                                    <div className="flex items-center gap-2.5 justify-center mb-2">
+                                        <span className="text-3xl md:text-4xl">{group.icon}</span>
+                                        <h3 className="text-2xl md:text-3xl font-extrabold text-white">{group.name}</h3>
                                     </div>
-                                    <div className="text-center mb-4 md:mb-6">
-                                        <p className="text-4xl md:text-6xl font-black text-white number-counter glow">{group.data.average.toFixed(2)}</p>
-                                        <p className="text-sm md:text-lg text-white/60 mt-2">평균 점수</p>
+
+                                    <div className="text-center my-3 md:my-5 bg-white/5 py-4 md:py-6 rounded-2xl border border-white/10">
+                                        <p className="text-5xl md:text-6xl font-black text-white number-counter glow tracking-tight">
+                                            {group.data.average.toFixed(2)}
+                                        </p>
+                                        <p className="text-base md:text-lg text-white/80 font-bold mt-1.5">평균 만족도</p>
                                     </div>
-                                    <div className="space-y-3">
-                                        <div className="bg-green-500/20 p-3 rounded-xl">
-                                            <p className="text-xs md:text-sm text-white/60">최고점</p>
-                                            <p className="text-xl md:text-2xl font-bold text-green-300">{group.data.highest.toFixed(2)}</p>
+
+                                    <div className="space-y-2.5 w-full">
+                                        <div className="bg-green-500/20 p-3 md:p-4 rounded-xl border border-green-400/30 flex justify-between items-center">
+                                            <div className="text-left">
+                                                <span className="text-xs text-green-200 font-bold uppercase">최고점</span>
+                                                <p className="text-sm text-white font-medium">최고 득점</p>
+                                            </div>
+                                            <p className="text-2xl md:text-3xl font-black text-green-300">{group.data.highest.toFixed(2)}</p>
                                         </div>
-                                        <div className="bg-orange-500/20 p-3 rounded-xl">
-                                            <p className="text-xs md:text-sm text-white/60">최저점</p>
-                                            <p className="text-xl md:text-2xl font-bold text-orange-300">{group.data.lowest.toFixed(2)}</p>
+                                        <div className="bg-orange-500/20 p-3 md:p-4 rounded-xl border border-orange-400/30 flex justify-between items-center">
+                                            <div className="text-left">
+                                                <span className="text-xs text-orange-200 font-bold uppercase">최저점</span>
+                                                <p className="text-sm text-white font-medium">개선 필요</p>
+                                            </div>
+                                            <p className="text-2xl md:text-3xl font-black text-orange-300">{group.data.lowest.toFixed(2)}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -1718,22 +1778,37 @@
             
             return (
                 <SlideWrapper className="text-center">
-                    <div className="w-full max-w-5xl fade-in-scale">
-                        <h2 className="text-3xl md:text-5xl font-bold text-white mb-2 md:mb-4">🏆 TOP 3 항목 (교원)</h2>
-                        <p className="text-lg md:text-2xl text-white/60 mb-8 md:mb-12">가장 높은 만족도를 기록한 항목</p>
-                        <div className="space-y-4 md:space-y-6">
+                    <div className="w-full max-w-[94rem] mx-auto fade-in-scale flex flex-col justify-center">
+                        <SlideTitle subtitle="교원들이 가장 높은 만족을 평가한 상위 3대 항목">🏆 TOP 3 항목 (교원)</SlideTitle>
+                        <div className="space-y-3 md:space-y-4 mt-3 md:mt-5 w-full">
                             {topBottomItems.teacherTop.length > 0 ? topBottomItems.teacherTop.map((item, idx) => (
                                 <div 
                                     key={idx}
-                                    className={`bg-gradient-to-r from-green-500/20 to-emerald-500/20 backdrop-blur-xl rounded-2xl p-4 md:p-8 border border-green-400/30 slide-in-right`}
+                                    className={`bg-gradient-to-r from-green-500/20 to-emerald-500/20 backdrop-blur-xl rounded-2xl md:rounded-3xl py-4 px-5 md:py-5 md:px-8 border border-green-400/30 slide-in-right flex flex-col justify-between min-h-[90px] md:min-h-[110px]`}
                                     style={{ animationDelay: `${idx * 200}ms` }}
                                 >
-                                    <div className="flex flex-col md:flex-row items-center md:items-center justify-between gap-4 md:gap-6">
-                                        <div className="flex items-start md:items-center gap-4 md:gap-6 w-full md:w-auto">
-                                            <span className="text-3xl md:text-5xl">{idx === 0 ? '🥇' : idx === 1 ? '🥈' : '🥉'}</span>
-                                            <p className="text-lg md:text-2xl text-white/90 text-left flex-1">{item.title}</p>
+                                    <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-3 md:gap-6">
+                                        <div className="flex items-center gap-3 md:gap-5 flex-1 text-left">
+                                            <div className="w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-white/10 flex items-center justify-center text-3xl md:text-4xl shrink-0 shadow-md border border-white/20">
+                                                {idx === 0 ? '🥇' : idx === 1 ? '🥈' : '🥉'}
+                                            </div>
+                                            <div>
+                                                <span className="text-xs md:text-sm font-bold text-green-300 uppercase tracking-wider mb-0.5 inline-block">
+                                                    {idx + 1}위 우수 영역
+                                                </span>
+                                                <p className="text-lg md:text-2xl font-black text-white leading-snug">{item.title}</p>
+                                            </div>
                                         </div>
-                                        <span className="text-3xl md:text-4xl font-black text-green-300 whitespace-nowrap self-end md:self-auto">{item.score}</span>
+                                        <div className="text-right shrink-0 self-end md:self-auto">
+                                            <span className="text-3xl md:text-5xl font-black text-green-300 glow">{item.score}</span>
+                                            <span className="text-sm md:text-lg text-white/60 font-normal ml-1.5">/ 5.0</span>
+                                        </div>
+                                    </div>
+                                    <div className="w-full mt-2.5 md:mt-3 h-2 md:h-2.5 bg-white/20 rounded-full overflow-hidden">
+                                        <div 
+                                            className="h-full bg-gradient-to-r from-green-400 to-emerald-400 rounded-full progress-animate"
+                                            style={{ width: `${(parseFloat(item.score) / 5) * 100}%` }}
+                                        ></div>
                                     </div>
                                 </div>
                             )) : (
@@ -1753,22 +1828,37 @@
             
             return (
                 <SlideWrapper className="text-center">
-                    <div className="w-full max-w-5xl fade-in-scale">
-                        <h2 className="text-3xl md:text-5xl font-bold text-white mb-2 md:mb-4">🏆 TOP 3 항목 (학생)</h2>
-                        <p className="text-lg md:text-2xl text-white/60 mb-8 md:mb-12">학생들이 가장 만족한 항목</p>
-                        <div className="space-y-4 md:space-y-6">
+                    <div className="w-full max-w-[94rem] mx-auto fade-in-scale flex flex-col justify-center">
+                        <SlideTitle subtitle="학생들이 가장 높은 만족을 표현한 상위 3대 항목">🏆 TOP 3 항목 (학생)</SlideTitle>
+                        <div className="space-y-3 md:space-y-4 mt-3 md:mt-5 w-full">
                             {topBottomItems.studentTop.length > 0 ? topBottomItems.studentTop.map((item, idx) => (
                                 <div 
                                     key={idx}
-                                    className={`bg-gradient-to-r from-green-500/20 to-emerald-500/20 backdrop-blur-xl rounded-2xl p-4 md:p-8 border border-green-400/30 slide-in-right`}
+                                    className={`bg-gradient-to-r from-green-500/20 to-emerald-500/20 backdrop-blur-xl rounded-2xl md:rounded-3xl py-4 px-5 md:py-5 md:px-8 border border-green-400/30 slide-in-right flex flex-col justify-between min-h-[90px] md:min-h-[110px]`}
                                     style={{ animationDelay: `${idx * 200}ms` }}
                                 >
-                                    <div className="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6">
-                                        <div className="flex items-start md:items-center gap-4 md:gap-6 w-full md:w-auto">
-                                            <span className="text-3xl md:text-5xl">{idx === 0 ? '🥇' : idx === 1 ? '🥈' : '🥉'}</span>
-                                            <p className="text-lg md:text-2xl text-white/90 text-left flex-1">{item.title}</p>
+                                    <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-3 md:gap-6">
+                                        <div className="flex items-center gap-3 md:gap-5 flex-1 text-left">
+                                            <div className="w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-white/10 flex items-center justify-center text-3xl md:text-4xl shrink-0 shadow-md border border-white/20">
+                                                {idx === 0 ? '🥇' : idx === 1 ? '🥈' : '🥉'}
+                                            </div>
+                                            <div>
+                                                <span className="text-xs md:text-sm font-bold text-green-300 uppercase tracking-wider mb-0.5 inline-block">
+                                                    {idx + 1}위 우수 영역
+                                                </span>
+                                                <p className="text-lg md:text-2xl font-black text-white leading-snug">{item.title}</p>
+                                            </div>
                                         </div>
-                                        <span className="text-3xl md:text-4xl font-black text-green-300 whitespace-nowrap self-end md:self-auto">{item.score}</span>
+                                        <div className="text-right shrink-0 self-end md:self-auto">
+                                            <span className="text-3xl md:text-5xl font-black text-green-300 glow">{item.score}</span>
+                                            <span className="text-sm md:text-lg text-white/60 font-normal ml-1.5">/ 5.0</span>
+                                        </div>
+                                    </div>
+                                    <div className="w-full mt-2.5 md:mt-3 h-2 md:h-2.5 bg-white/20 rounded-full overflow-hidden">
+                                        <div 
+                                            className="h-full bg-gradient-to-r from-green-400 to-emerald-400 rounded-full progress-animate"
+                                            style={{ width: `${(parseFloat(item.score) / 5) * 100}%` }}
+                                        ></div>
                                     </div>
                                 </div>
                             )) : (
@@ -1788,22 +1878,37 @@
             
             return (
                 <SlideWrapper className="text-center">
-                    <div className="w-full max-w-5xl fade-in-scale">
-                        <h2 className="text-3xl md:text-5xl font-bold text-white mb-2 md:mb-4">⚠️ 개선 필요 항목 (교원)</h2>
-                        <p className="text-lg md:text-2xl text-white/60 mb-8 md:mb-12">교원이 가장 낮게 평가한 영역</p>
-                        <div className="space-y-4 md:space-y-6">
+                    <div className="w-full max-w-[94rem] mx-auto fade-in-scale flex flex-col justify-center">
+                        <SlideTitle subtitle="교원 평가에서 점수가 상대적으로 낮은 하위 3개 개선 영역">⚠️ 개선 필요 항목 (교원)</SlideTitle>
+                        <div className="space-y-3 md:space-y-4 mt-3 md:mt-5 w-full">
                             {topBottomItems.teacherBottom.length > 0 ? topBottomItems.teacherBottom.map((item, idx) => (
                                 <div 
                                     key={idx}
-                                    className={`bg-gradient-to-r from-red-500/20 to-pink-500/20 backdrop-blur-xl rounded-2xl p-4 md:p-8 border border-red-400/30 slide-in-right`}
+                                    className={`bg-gradient-to-r from-red-500/20 to-pink-500/20 backdrop-blur-xl rounded-2xl md:rounded-3xl py-4 px-5 md:py-5 md:px-8 border border-red-400/30 slide-in-right flex flex-col justify-between min-h-[90px] md:min-h-[110px]`}
                                     style={{ animationDelay: `${idx * 200}ms` }}
                                 >
-                                    <div className="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6">
-                                        <div className="flex items-start md:items-center gap-4 md:gap-6 w-full md:w-auto">
-                                            <span className="text-3xl md:text-5xl">👎</span>
-                                            <p className="text-lg md:text-2xl text-white/90 text-left flex-1">{item.title}</p>
+                                    <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-3 md:gap-6">
+                                        <div className="flex items-center gap-3 md:gap-5 flex-1 text-left">
+                                            <div className="w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-white/10 flex items-center justify-center text-3xl md:text-4xl shrink-0 shadow-md border border-white/20">
+                                                👎
+                                            </div>
+                                            <div>
+                                                <span className="text-xs md:text-sm font-bold text-red-300 uppercase tracking-wider mb-0.5 inline-block">
+                                                    중점 개선 과제 0{idx + 1}
+                                                </span>
+                                                <p className="text-lg md:text-2xl font-black text-white leading-snug">{item.title}</p>
+                                            </div>
                                         </div>
-                                        <span className="text-3xl md:text-4xl font-black text-red-300 whitespace-nowrap self-end md:self-auto">{item.score}</span>
+                                        <div className="text-right shrink-0 self-end md:self-auto">
+                                            <span className="text-3xl md:text-5xl font-black text-red-300 glow">{item.score}</span>
+                                            <span className="text-sm md:text-lg text-white/60 font-normal ml-1.5">/ 5.0</span>
+                                        </div>
+                                    </div>
+                                    <div className="w-full mt-2.5 md:mt-3 h-2 md:h-2.5 bg-white/20 rounded-full overflow-hidden">
+                                        <div 
+                                            className="h-full bg-gradient-to-r from-red-400 to-pink-500 rounded-full progress-animate"
+                                            style={{ width: `${(parseFloat(item.score) / 5) * 100}%` }}
+                                        ></div>
                                     </div>
                                 </div>
                             )) : (
@@ -1823,22 +1928,37 @@
             
             return (
                 <SlideWrapper className="text-center">
-                    <div className="w-full max-w-5xl fade-in-scale">
-                        <h2 className="text-3xl md:text-5xl font-bold text-white mb-2 md:mb-4">⚠️ 개선 필요 항목 (학생)</h2>
-                        <p className="text-lg md:text-2xl text-white/60 mb-8 md:mb-12">학생이 가장 낮게 평가한 영역</p>
-                        <div className="space-y-4 md:space-y-6">
+                    <div className="w-full max-w-[94rem] mx-auto fade-in-scale flex flex-col justify-center">
+                        <SlideTitle subtitle="학생 평가에서 만족도가 상대적으로 낮아 개선이 시급한 영역">⚠️ 개선 필요 항목 (학생)</SlideTitle>
+                        <div className="space-y-3 md:space-y-4 mt-3 md:mt-5 w-full">
                             {topBottomItems.studentBottom.length > 0 ? topBottomItems.studentBottom.map((item, idx) => (
                                 <div 
                                     key={idx}
-                                    className={`bg-gradient-to-r from-red-500/20 to-pink-500/20 backdrop-blur-xl rounded-2xl p-4 md:p-8 border border-red-400/30 slide-in-right`}
+                                    className={`bg-gradient-to-r from-red-500/20 to-pink-500/20 backdrop-blur-xl rounded-2xl md:rounded-3xl py-4 px-5 md:py-5 md:px-8 border border-red-400/30 slide-in-right flex flex-col justify-between min-h-[90px] md:min-h-[110px]`}
                                     style={{ animationDelay: `${idx * 200}ms` }}
                                 >
-                                    <div className="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6">
-                                        <div className="flex items-start md:items-center gap-4 md:gap-6 w-full md:w-auto">
-                                            <span className="text-3xl md:text-5xl">😟</span>
-                                            <p className="text-lg md:text-2xl text-white/90 text-left flex-1">{item.title}</p>
+                                    <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-3 md:gap-6">
+                                        <div className="flex items-center gap-3 md:gap-5 flex-1 text-left">
+                                            <div className="w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-white/10 flex items-center justify-center text-3xl md:text-4xl shrink-0 shadow-md border border-white/20">
+                                                😟
+                                            </div>
+                                            <div>
+                                                <span className="text-xs md:text-sm font-bold text-red-300 uppercase tracking-wider mb-0.5 inline-block">
+                                                    중점 개선 과제 0{idx + 1}
+                                                </span>
+                                                <p className="text-lg md:text-2xl font-black text-white leading-snug">{item.title}</p>
+                                            </div>
                                         </div>
-                                        <span className="text-3xl md:text-4xl font-black text-red-300 whitespace-nowrap self-end md:self-auto">{item.score}</span>
+                                        <div className="text-right shrink-0 self-end md:self-auto">
+                                            <span className="text-3xl md:text-5xl font-black text-red-300 glow">{item.score}</span>
+                                            <span className="text-sm md:text-lg text-white/60 font-normal ml-1.5">/ 5.0</span>
+                                        </div>
+                                    </div>
+                                    <div className="w-full mt-2.5 md:mt-3 h-2 md:h-2.5 bg-white/20 rounded-full overflow-hidden">
+                                        <div 
+                                            className="h-full bg-gradient-to-r from-red-400 to-pink-500 rounded-full progress-animate"
+                                            style={{ width: `${(parseFloat(item.score) / 5) * 100}%` }}
+                                        ></div>
                                     </div>
                                 </div>
                             )) : (
@@ -1858,37 +1978,40 @@
             
             return (
                 <SlideWrapper className="text-center">
-                    <div className="w-full max-w-6xl fade-in-scale">
-                        <h2 className="text-3xl md:text-5xl font-bold text-white mb-8 md:mb-12">📈 연도별 만족도 추이</h2>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+                    <div className="w-full max-w-[94rem] mx-auto fade-in-scale flex flex-col justify-center">
+                        <SlideTitle subtitle="최근 4개년 연도별 만족도 데이터 종합">📈 연도별 만족도 추이</SlideTitle>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 md:gap-5 mt-3 md:mt-4">
                             {trendData.map((data, idx) => (
                                 <div 
                                     key={idx} 
-                                    className={`bg-white/10 backdrop-blur-xl rounded-3xl p-6 border border-white/20 rotate-in card-3d`}
+                                    className={`bg-white/10 backdrop-blur-xl rounded-2xl md:rounded-3xl p-5 md:p-6 border border-white/20 rotate-in card-3d flex flex-col justify-between min-h-[320px] md:min-h-[380px]`}
                                     style={{ animationDelay: `${idx * 150}ms` }}
                                 >
-                                    <p className="text-3xl md:text-4xl font-black text-white mb-4 md:mb-6">{data.year}</p>
-                                    <div className="space-y-3 md:space-y-4">
-                                        <div className="bg-indigo-500/20 p-2 md:p-3 rounded-xl">
-                                            <p className="text-xs md:text-sm text-indigo-300">교원</p>
-                                            <p className="text-xl md:text-2xl font-bold text-white">{data.teacher.toFixed(2)}</p>
+                                    <div className="text-center pb-3 border-b border-white/20">
+                                        <p className="text-4xl md:text-5xl font-black text-white mb-1">{data.year}년</p>
+                                        <span className="text-xs md:text-sm text-white/70 font-bold">종합 만족도 결산</span>
+                                    </div>
+                                    <div className="space-y-2.5 my-3 flex-1 flex flex-col justify-around">
+                                        <div className="bg-indigo-500/20 p-2.5 md:p-3 rounded-xl flex justify-between items-center border border-indigo-400/20">
+                                            <p className="text-sm md:text-base text-indigo-300 font-bold">교원</p>
+                                            <p className="text-xl md:text-2xl font-black text-white">{data.teacher.toFixed(2)}</p>
                                         </div>
-                                        <div className="bg-pink-500/20 p-2 md:p-3 rounded-xl">
-                                            <p className="text-xs md:text-sm text-pink-300">학생</p>
-                                            <p className="text-xl md:text-2xl font-bold text-white">{data.student.toFixed(2)}</p>
+                                        <div className="bg-pink-500/20 p-2.5 md:p-3 rounded-xl flex justify-between items-center border border-pink-400/20">
+                                            <p className="text-sm md:text-base text-pink-300 font-bold">학생</p>
+                                            <p className="text-xl md:text-2xl font-black text-white">{data.student.toFixed(2)}</p>
                                         </div>
-                                        <div className="bg-emerald-500/20 p-2 md:p-3 rounded-xl">
-                                            <p className="text-xs md:text-sm text-emerald-300">학부모</p>
-                                            <p className="text-xl md:text-2xl font-bold text-white">{data.parent.toFixed(2)}</p>
+                                        <div className="bg-emerald-500/20 p-2.5 md:p-3 rounded-xl flex justify-between items-center border border-emerald-400/20">
+                                            <p className="text-sm md:text-base text-emerald-300 font-bold">학부모</p>
+                                            <p className="text-xl md:text-2xl font-black text-white">{data.parent.toFixed(2)}</p>
                                         </div>
-                                        <div className="bg-amber-500/20 p-2 md:p-3 rounded-xl">
-                                            <p className="text-xs md:text-sm text-amber-300">직원</p>
-                                            <p className="text-xl md:text-2xl font-bold text-white">{data.staff.toFixed(2)}</p>
+                                        <div className="bg-amber-500/20 p-2.5 md:p-3 rounded-xl flex justify-between items-center border border-amber-400/20">
+                                            <p className="text-sm md:text-base text-amber-300 font-bold">직원</p>
+                                            <p className="text-xl md:text-2xl font-black text-white">{data.staff.toFixed(2)}</p>
                                         </div>
-                                        <div className="pt-3 border-t border-white/20">
-                                            <p className="text-sm text-white/60">평균</p>
-                                            <p className="text-2xl md:text-3xl font-black text-yellow-300">{data.overall.toFixed(2)}</p>
-                                        </div>
+                                    </div>
+                                    <div className="pt-3 border-t border-white/20 text-center bg-white/5 p-3 rounded-xl">
+                                        <p className="text-xs md:text-sm text-white/70 font-bold mb-0.5">전체 평균</p>
+                                        <p className="text-3xl md:text-4xl font-black text-yellow-300 glow">{data.overall.toFixed(2)}</p>
                                     </div>
                                 </div>
                             ))}
@@ -1974,8 +2097,9 @@
                                     labels: {
                                         color: 'rgba(255, 255, 255, 0.9)',
                                         usePointStyle: true,
-                                        boxWidth: 8,
-                                        font: { size: 12, weight: '600' }
+                                        boxWidth: 10,
+                                        padding: 20,
+                                        font: { size: 14, weight: '700' }
                                     }
                                 }
                             },
@@ -1985,11 +2109,11 @@
                                     min: 3.0,
                                     max: 5.0,
                                     grid: { color: 'rgba(255, 255, 255, 0.1)' },
-                                    ticks: { color: 'rgba(255, 255, 255, 0.8)' }
+                                    ticks: { color: 'rgba(255, 255, 255, 0.8)', font: { size: 14 } }
                                 },
                                 x: {
                                     grid: { color: 'rgba(255, 255, 255, 0.05)' },
-                                    ticks: { color: 'rgba(255, 255, 255, 0.9)' }
+                                    ticks: { color: 'rgba(255, 255, 255, 0.9)', font: { size: 14 } }
                                 }
                             }
                         }
@@ -2005,10 +2129,9 @@
 
             return (
                 <SlideWrapper className="text-center">
-                    <div className="w-full max-w-6xl fade-in-scale">
-                        <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">📈 연도별 만족도 추이 그래프</h2>
-                        <p className="text-lg md:text-2xl text-white/60 mb-6 md:mb-10">그룹별 연도별 만족도 변화</p>
-                        <div className="bg-white/10 backdrop-blur-xl rounded-3xl p-4 md:p-8 border border-white/20 h-64 md:h-[500px]">
+                    <div className="w-full max-w-[94rem] mx-auto fade-in-scale">
+                        <SlideTitle subtitle="그룹별 다년간 만족도 변동 곡선 시각화">📈 연도별 만족도 추이 그래프</SlideTitle>
+                        <div className="bg-white/10 backdrop-blur-xl rounded-3xl p-6 md:p-10 border border-white/20 h-72 md:h-[520px] lg:h-[600px] w-full mt-4">
                             <canvas ref={canvasRef}></canvas>
                         </div>
                     </div>
@@ -2031,20 +2154,20 @@
             
             return (
                 <SlideWrapper className="text-center">
-                    <div className="w-full max-w-5xl fade-in-scale">
-                        <h2 className="text-3xl md:text-5xl font-bold text-white mb-8 md:mb-12">🤖 AI 핵심 인사이트</h2>
-                        <div className="space-y-4 md:space-y-5 text-left">
+                    <div className="w-full max-w-[94rem] mx-auto fade-in-scale">
+                        <SlideTitle subtitle="데이터 분석 기반 주요 강점 및 핵심 시사점">🤖 AI 핵심 인사이트</SlideTitle>
+                        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6 text-left mt-4">
                             {aiInsights.length > 0 ? aiInsights.map((insight, idx) => (
                                 <div 
                                     key={idx}
-                                    className={`bg-gradient-to-r ${getTypeStyle(insight.type)} backdrop-blur-xl rounded-2xl p-4 md:p-6 border slide-up-bounce`}
+                                    className={`bg-gradient-to-r ${getTypeStyle(insight.type)} backdrop-blur-xl rounded-3xl p-6 md:p-8 border slide-up-bounce flex flex-col justify-between`}
                                     style={{ animationDelay: `${idx * 150}ms` }}
                                 >
-                                    <h3 className="text-lg md:text-2xl font-bold text-white mb-2">{insight.title}</h3>
-                                    <p className="text-base md:text-xl text-white/80">{insight.content}</p>
+                                    <h3 className="text-xl md:text-3xl font-extrabold text-white mb-4">{insight.title}</h3>
+                                    <p className="text-lg md:text-xl text-white/85 leading-relaxed">{insight.content}</p>
                                 </div>
                             )) : (
-                                <div className="text-center text-white/60 py-12">
+                                <div className="text-center text-white/60 py-12 col-span-full">
                                     <p className="text-2xl">데이터를 업로드하면 AI 인사이트가 생성됩니다.</p>
                                 </div>
                             )}
@@ -2060,39 +2183,37 @@
             
             return (
                 <SlideWrapper className="text-center">
-                    <div className="w-full max-w-6xl fade-in-up">
-                        <h2 className="text-3xl md:text-5xl font-bold text-white mb-8">🎯 핵심 실행 과제</h2>
-                        <div className="space-y-4 md:space-y-5 text-left">
+                    <div className="w-full max-w-[94rem] mx-auto fade-in-up">
+                        <SlideTitle subtitle="평가 결과에 기반한 학교 발전 우선 과제">🎯 핵심 실행 과제</SlideTitle>
+                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 text-left mt-4">
                             {actionItems.length > 0 ? actionItems.map((item, index) => (
                                 <div 
-                                    key={index}
-                                    className={`bg-white/95 backdrop-blur-xl rounded-3xl p-4 md:p-6 shadow-2xl flip-in`}
+                                    key={index} 
+                                    className={`bg-white/95 backdrop-blur-xl rounded-3xl p-6 md:p-8 shadow-2xl flip-in flex flex-col`}
                                     style={{ animationDelay: `${index * 200}ms` }}
                                 >
-                                    <div className="flex flex-col md:flex-row items-center md:items-start gap-4 md:gap-6">
+                                    <div className="flex items-center gap-4 mb-5">
                                         <div className="w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-3xl md:text-4xl shadow-lg bounce shrink-0">
                                             {item.icon}
                                         </div>
-                                        <div className="flex-1 w-full">
-                                            <div className="flex flex-col md:flex-row items-center md:items-center gap-2 md:gap-4 mb-3 md:mb-4">
-                                                <span className="px-3 py-1 md:px-5 md:py-2 bg-indigo-600 text-white rounded-full text-sm md:text-lg font-bold shadow-md">
-                                                    우선순위 {item.priority}
-                                                </span>
-                                                <h3 className="text-xl md:text-3xl font-bold text-gray-900">{item.title}</h3>
-                                            </div>
-                                            <ul className="flex flex-wrap gap-2 md:gap-3">
-                                                {item.details.map((detail, i) => (
-                                                    <li key={i} className="flex items-center gap-2 bg-indigo-50 border-2 border-indigo-100 px-3 py-1 md:px-5 md:py-2 rounded-full text-sm md:text-lg font-semibold text-indigo-900">
-                                                        <span className="text-indigo-600 font-bold">✓</span>
-                                                        <span>{detail}</span>
-                                                    </li>
-                                                ))}
-                                            </ul>
+                                        <div>
+                                            <span className="inline-block px-3.5 py-1 bg-indigo-600 text-white rounded-full text-sm md:text-base font-bold shadow-md mb-1.5">
+                                                우선순위 {item.priority}
+                                            </span>
+                                            <h3 className="text-2xl md:text-3xl font-black text-gray-900 leading-snug">{item.title}</h3>
                                         </div>
                                     </div>
+                                    <ul className="flex flex-col gap-3 mt-auto">
+                                        {item.details.map((detail, i) => (
+                                            <li key={i} className="flex items-start gap-2.5 bg-indigo-50/80 border border-indigo-100 p-3.5 rounded-2xl text-base md:text-lg font-semibold text-indigo-900">
+                                                <span className="text-indigo-600 font-bold shrink-0">✓</span>
+                                                <span>{detail}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
                                 </div>
                             )) : (
-                                <div className="text-center text-white/60 py-12">
+                                <div className="text-center text-white/60 py-12 col-span-full">
                                     <p className="text-2xl">데이터를 업로드하면 실행 과제가 생성됩니다.</p>
                                 </div>
                             )}
@@ -2105,9 +2226,9 @@
         // Slide 14: Roadmap Slide
         const RoadmapSlide = ({ schoolData }) => (
             <SlideWrapper className="text-center">
-                <div className="w-full max-w-6xl fade-in-up">
-                    <h2 className="text-3xl md:text-5xl font-bold text-white mb-8 md:mb-16">🗺️ {parseInt(schoolData.academicYear) + 1} 실행 로드맵</h2>
-                    <div className="relative">
+                <div className="w-full max-w-[94rem] mx-auto fade-in-up">
+                    <SlideTitle subtitle="차년도 4개 분기별 구체적 실행 일정">🗺️ {parseInt(schoolData.academicYear) + 1} 실행 로드맵</SlideTitle>
+                    <div className="relative mt-8">
                         <div className="hidden md:block absolute top-1/2 left-0 right-0 h-2 bg-white/20 rounded-full"></div>
                         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-8 relative">
                             {schoolData.roadmap.map((item, index) => (
@@ -2122,10 +2243,10 @@
                                             style={{ backgroundColor: item.color }}
                                         ></div>
                                     </div>
-                                    <div className="bg-white/95 backdrop-blur-xl rounded-3xl p-4 md:p-6 shadow-xl card-3d w-full order-2 md:order-2">
-                                        <div className="text-xl md:text-3xl font-black text-gray-900 mb-1 md:mb-2">{item.quarter}</div>
-                                        <div className="text-sm md:text-lg text-gray-500 mb-2 md:mb-4">{item.period}</div>
-                                        <div className="text-base md:text-lg font-semibold text-gray-700">{item.task}</div>
+                                    <div className="bg-white/95 backdrop-blur-xl rounded-3xl p-5 md:p-8 shadow-xl card-3d w-full order-2 md:order-2">
+                                        <div className="text-2xl md:text-4xl font-black text-gray-900 mb-1 md:mb-2">{item.quarter}</div>
+                                        <div className="text-base md:text-xl text-gray-500 mb-3 md:mb-5 font-semibold">{item.period}</div>
+                                        <div className="text-lg md:text-2xl font-bold text-gray-800">{item.task}</div>
                                     </div>
                                 </div>
                             ))}
@@ -2143,23 +2264,23 @@
             
             return (
                 <SlideWrapper className="text-center">
-                    <div className="w-full max-w-5xl zoom-in">
-                        <h2 className="text-3xl md:text-6xl font-bold text-white mb-8 md:mb-16">🎯 {parseInt(schoolData.academicYear) + 1} 목표</h2>
-                        <div className="bg-white/10 backdrop-blur-xl rounded-3xl p-6 md:p-16 border border-white/20">
-                            <p className="text-2xl md:text-4xl text-white/70 font-semibold mb-8 md:mb-12 text-center">종합 만족도</p>
-                            <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16">
+                    <div className="w-full max-w-[94rem] mx-auto zoom-in">
+                        <SlideTitle subtitle="현재 만족도 기반 달성 목표 점수">🎯 {parseInt(schoolData.academicYear) + 1} 목표</SlideTitle>
+                        <div className="bg-white/10 backdrop-blur-xl rounded-3xl p-8 md:p-16 border border-white/20 mt-4">
+                            <p className="text-3xl md:text-5xl text-white/80 font-bold mb-8 md:mb-12 text-center">종합 만족도</p>
+                            <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-20">
                                 <div className="text-center">
-                                    <p className="text-lg md:text-2xl text-white/60 mb-2 md:mb-4">현재</p>
-                                    <span className="text-6xl md:text-8xl font-black text-white number-counter">{currentScore.toFixed(2)}</span>
+                                    <p className="text-xl md:text-3xl text-white/60 mb-2 md:mb-4">현재 점수</p>
+                                    <span className="text-6xl md:text-9xl font-black text-white number-counter">{currentScore.toFixed(2)}</span>
                                 </div>
-                                <span className="text-6xl md:text-8xl text-white/50 bounce rotate-90 md:rotate-0">→</span>
+                                <span className="text-6xl md:text-9xl text-white/50 bounce rotate-90 md:rotate-0">→</span>
                                 <div className="text-center">
-                                    <p className="text-lg md:text-2xl text-green-300 mb-2 md:mb-4">목표</p>
-                                    <span className="text-6xl md:text-8xl font-black text-green-400 number-counter glow">{targetScore.toFixed(2)}</span>
+                                    <p className="text-xl md:text-3xl text-green-300 mb-2 md:mb-4 font-bold">목표 점수</p>
+                                    <span className="text-6xl md:text-9xl font-black text-green-400 number-counter glow">{targetScore.toFixed(2)}</span>
                                 </div>
                             </div>
-                            <div className="mt-8 md:mt-12 text-center">
-                                <span className="inline-block px-4 py-3 md:px-8 md:py-4 bg-green-500/20 rounded-full text-xl md:text-3xl font-bold text-green-300 border border-green-400/30">
+                            <div className="mt-10 md:mt-16 text-center">
+                                <span className="inline-block px-6 py-4 md:px-12 md:py-6 bg-green-500/20 rounded-full text-2xl md:text-4xl font-black text-green-300 border border-green-400/30 shadow-lg">
                                     📈 +{(goal.targetScore - goal.currentScore).toFixed(2)}점 상승 목표
                                 </span>
                             </div>
@@ -2172,20 +2293,20 @@
         // Slide 16: Closing Slide
         const ClosingSlide = ({ schoolData }) => (
             <SlideWrapper className="text-center">
-                <div className="zoom-in">
+                <div className="zoom-in w-full max-w-[94rem] mx-auto flex flex-col items-center">
                     <div className="inline-block p-8 md:p-12 bg-white/10 backdrop-blur-xl rounded-3xl border border-white/20 mb-8 md:mb-12 float glow">
                         <div className="w-32 h-32 md:w-48 md:h-48 text-white">
                             <SchoolIcon />
                         </div>
                     </div>
-                    <h2 className="display-2 text-white mb-4 md:mb-8">감사합니다</h2>
-                    <p className="text-2xl md:text-4xl text-white/80 font-medium mb-2 md:mb-4">
+                    <h2 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-white tracking-tight mb-4 md:mb-8 drop-shadow-lg">감사합니다</h2>
+                    <p className="text-2xl sm:text-3xl md:text-5xl text-white/90 font-medium mb-3 md:mb-5">
                         더 나은 <span className="text-yellow-300 font-bold">{schoolData.schoolName}</span>을 위해
                     </p>
-                    <p className="text-2xl md:text-4xl text-white/80 font-medium mb-8 md:mb-12">
+                    <p className="text-2xl sm:text-3xl md:text-5xl text-white/80 font-medium mb-8 md:mb-12">
                         함께 나아갑시다
                     </p>
-                    <div className="flex items-center justify-center gap-4 md:gap-6 text-4xl md:text-6xl fade-in-up stagger-3">
+                    <div className="flex items-center justify-center gap-4 md:gap-8 text-5xl md:text-7xl fade-in-up stagger-3">
                         <span className="wave-1">🎓</span>
                         <span className="wave-2">📚</span>
                         <span className="wave-3">💪</span>
@@ -2250,11 +2371,11 @@
             return (
                 <div className="fixed inset-0 presentation-slide z-50 bg-gray-900">
                     <div className="relative z-10 flex flex-col h-full">
-                        <div className="flex-1 overflow-y-auto no-scrollbar">
+                        <div className="flex-1 overflow-y-auto no-scrollbar flex flex-col">
                             {slides[currentSlide]}
                         </div>
                         <div className="p-4 md:p-6 bg-gradient-to-t from-black/50 to-transparent sticky bottom-0 z-20">
-                            <div className="max-w-3xl mx-auto">
+                            <div className="max-w-7xl mx-auto">
                                 <div className="flex items-center justify-between mb-4">
                                     <span className="text-white/60 text-sm md:text-lg font-medium">
                                         {currentSlide + 1} / {totalSlides}
